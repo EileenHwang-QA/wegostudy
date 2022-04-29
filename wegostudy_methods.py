@@ -71,9 +71,6 @@ def sign_in():
     driver.find_element(By.XPATH, "//input[@name='commit']").click()
     sleep(1)
 
-    # driver.find_element(By.XPATH, "//div[@id='authentication']").click()
-    # sleep(0.5)
-
     if driver. current_url == locators.partner_home_url:
         driver.find_element(By.XPATH, "//span[contains(.,'Ch Velasco')]").is_displayed()
         sleep(0.5)
@@ -134,15 +131,17 @@ def my_wegostudy_applications():
         driver.find_element(By.XPATH, f"//a[normalize-space()='{locators.id_number}']").click()
         sleep(0.5)
 
-
         # Navigate to personal detail page
         driver.switch_to.window(driver.window_handles[1])
         sleep(1)
 
         if driver.current_url == locators.application_detail_url:
             driver.find_element(By.XPATH, f"//td[contains(.,'{locators.first_name}')]").is_displayed()
+            sleep(0.5)
             driver.find_element(By.XPATH, f"//td[contains(.,'{locators.last_name}')]").is_displayed()
+            sleep(0.5)
             driver.find_element(By.XPATH, f"//h6[contains(.,'{locators.full_name}')]").is_displayed()
+            sleep(0.5)
             print(f'we are at {locators.full_name} student details page.\n'
                   f'Test Scenario : Clicking ID number to get to Student detail page ---- is passed.')
 
@@ -151,7 +150,6 @@ def my_wegostudy_applications():
 
         sleep(2)
         driver.close()
-
 
         # switch to original tab
         driver.switch_to.window(driver.window_handles[0])
@@ -174,14 +172,17 @@ def my_wegostudy_applications():
         # switch to new tab
         driver.switch_to.window(driver.window_handles[1])
         sleep(0.5)
+
         if driver.current_url == locators.school_url:
             print(f'we are at {locators.school_name} page ')
 
         # navigate to college website
             driver.find_element(By.XPATH, "//a[contains(.,'Visit College Website')]").click()
             sleep(0.5)
+
             driver.switch_to.window(driver.window_handles[2])
             sleep(0.5)
+
             if driver.current_url == locators.school_website_url:
                 print(f'We are at {locators.school_name} website.----{locators.school_website_url}')
                 driver.close()
@@ -208,6 +209,7 @@ def my_wegostudy_applications():
         # navigate to Programs page
         driver.find_element(By.XPATH, f"//a[contains(.,'{locators.program_name}')]").is_displayed()
         sleep(0.5)
+
         driver.find_element(By.XPATH, f"//a[contains(.,'{locators.program_name}')]").click()
         sleep(0.5)
 
@@ -222,8 +224,10 @@ def my_wegostudy_applications():
         # navigate to college website
             driver.find_element(By.XPATH, "//a[contains(.,'Visit College Website')]").click()
             sleep(0.5)
+
             driver.switch_to.window(driver.window_handles[2])
             sleep(0.5)
+
             if driver.current_url == locators.school_website_url:
                 print(f'We are at {locators.school_name} website.----{locators.school_website_url}')
                 driver.close()
@@ -232,56 +236,52 @@ def my_wegostudy_applications():
 
             driver.find_element(By.XPATH, "//a[contains(.,'Tuition')]").click()
             sleep(0.5)
+
             driver.switch_to.window(driver.window_handles[2])
             sleep(0.5)
+
             if driver.current_url == locators.school_website_tuition_url:
                 print(f'we are at tuition page of {locators.school_name}\n'
                       f'----{locators.school_website_tuition_url}')
+
                 driver.close()
                 driver.switch_to.window(driver.window_handles[1])
                 sleep(0.5)
                 driver.close()
 
-        # switch to original tab
         driver.switch_to.window(driver.window_handles[0])
         sleep(0.5)
 
-        # # status
-        # driver.find_element(By.XPATH, "//span[@class='badge badge-incomplete status-badge']").is_displayed()
-        # sleep(0.5)
-        #
-        # # status date
-        # driver.find_element(By.XPATH, "//td[contains(.,'April 21, 2022')]").is_displayed()
-        # sleep(0.5)
-        #
-        # # check select
-        # driver.find_element(By.XPATH, "//label[@for='application_ids_84']").click()
-        # sleep(0.5)
-        #
-        # # Chat
-        # driver.find_element(By.XPATH, "//i[@class='fa fa-comments-o']").click()
-        # sleep(0.5)
-        #
-        # driver.find_element(By.XPATH, "//input[@id='admin_message_content']").click()
-        # sleep(0.5)
-        #
-        # driver.find_element(By.XPATH, "//input[@id='admin_message_content']").send_keys(locators.subject)
-        # sleep(0.5)
-        #
-        # driver.find_element(By.XPATH, "//i[@class='fa fa-paper-plane']]").click()
-        # sleep(0.5)
-        #
-        # driver.find_element(By.XPATH, "//i[@class='fa fa-comments-o']").click()
-        # sleep(0.5)
-        # print('successfully sent message!')
-        #
-        # driver.find_element(By.XPATH, "///button[@class='btn btn-default btn-sm']").click()
-        # sleep(0.5)
-        #
-        # // h6[1]
+        # status
+        driver.find_element(By.XPATH, "//span[contains(.,'Incomplete')]").is_displayed()
+        sleep(0.5)
 
+        # status date
+        driver.find_element(By.XPATH, f"//td[contains(.,'{locators.status_date}')]").is_displayed()
+        sleep(0.5)
 
+        # check select
+        driver.find_element(By.XPATH, "//*[contains(@class, 'odd')]/td[9]").click()
+        sleep(0.5)
 
+        # Chat
+        driver.find_element(By.XPATH, "//i[@class='fa fa-comments-o']").click()
+        sleep(0.5)
+
+        driver.find_element(By.XPATH, "//input[@id='admin_message_content']").click()
+        sleep(0.5)
+
+        driver.find_element(By.XPATH, "//input[@id='admin_message_content']").send_keys(locators.subject)
+        sleep(1)
+
+        driver.find_element(By.XPATH, "//input[@id='message_files']").send_keys("C:\\practice pic\\browse institution.png")
+
+        driver.find_element(By.XPATH, "//i[@class='fa fa-paper-plane']").click()
+        sleep(0.5)
+
+        driver.find_element(By.XPATH, "//button[contains(.,'Close')]").click()
+        sleep(0.5)
+        print('successfully sent message!')
 
 
 
@@ -316,4 +316,4 @@ setUp()
 # browse_institution()
 sign_in()
 my_wegostudy_applications()
-# tearDown()
+tearDown()
